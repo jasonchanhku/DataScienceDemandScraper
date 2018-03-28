@@ -29,9 +29,16 @@ import pandas as pd
 import unidecode
 import scraperwiki
 
-# PhantomJS support
-driver = webdriver.PhantomJS()
+# Incognito mode
+options = webdriver.ChromeOptions()
+options.add_argument('--incognito')
 
+# Headless option
+options2 = webdriver.ChromeOptions()
+options2.add_argument('headless')
+
+# get web driver up and running
+driver = webdriver.Chrome(options=options, chrome_options=options2)
 driver.get('https://www.glassdoor.com/index.htm')
 
 # window size to make sure javascript parts does not get hidden
