@@ -10,10 +10,19 @@ import scraperwiki
 # PhantomJS support
 driver = webdriver.PhantomJS()
 
+
 driver.get('https://www.glassdoor.com/Job/hong-kong-data-scientist-jobs-SRCH_IL.0,9_IC2308631_KO10,24.htm')
 
 # window size to make sure javascript parts does not get hidden
 driver.set_window_size(1280, 1024)
+
+# Make sure selenium doesn't give up
+# if it queries the dom before the ajax has landed
+driver.implicitly_wait(10)
+
+# Create our standard waitable...
+# At most, wait 30 seconds before exploding with a Timeout exception.
+wait = WebDriverWait(driver, 30)
 
 # To type in job title and location
 driver.find_element_by_css_selector('#KeywordSearch').send_keys('Data Scientist')
