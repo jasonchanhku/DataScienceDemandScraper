@@ -1,6 +1,7 @@
 
 
 from selenium import webdriver
+from selenium.webdriver.support.ui import WebDriverWait
 import time
 import pandas as pd
 import unidecode
@@ -8,7 +9,13 @@ import scraperwiki
 
 # PhantomJS support
 driver = webdriver.PhantomJS()
+# Make sure selenium doesn't give up
+# if it queries the dom before the ajax has landed
+driver.implicitly_wait(10)
 
+# Create our standard waitable...
+# At most, wait 30 seconds before exploding with a Timeout exception.
+wait = WebDriverWait(driver, 30)
 driver.get('https://www.glassdoor.com/index.htm')
 
 # window size to make sure javascript parts does not get hidden
