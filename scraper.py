@@ -21,7 +21,7 @@
 # You can use whatever libraries you want: https://morph.io/documentation/python
 # All that matters is that your final data is written to an SQLite database
 # called "data.sqlite" in the current working directory which has at least a table
-# called "data".
+# called "data" .
 
 from selenium import webdriver
 import time
