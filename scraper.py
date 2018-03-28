@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+
 
 from selenium import webdriver
 import time
@@ -41,6 +41,7 @@ while end:
         link.click()
         # Col 1: Job Title
         job_titles = link.text
+        print('Title: ', job_titles)
 
         try:
             # to cancel the annoying pop up that tries to prevent scrapers
@@ -51,6 +52,7 @@ while end:
         # Col 2: Company Name
         # Decoding some accents
         companies = unidecode.unidecode(link.find_elements_by_xpath('//div[@class="flexbox empLoc"]/div[1]')[j].text.split("–")[0].strip())
+        print('Company: ', companies)
         # Below has issue, those ith HOT or NEW won't be read as posted date
         # print('Posted: ',link.find_elements_by_xpath('//span[@class="minor"]')[i].text)
 
@@ -61,8 +63,10 @@ while end:
         # Col 4: Ratings
         try:
             ratings = link.find_element_by_xpath('//span[@class="compactStars margRtSm"]').text
+            print('Ratings: ', ratings)
         except:
             ratings = ''
+            print('Ratings: ', ratings)
             pass
 
         # Tab 1: Job description
@@ -85,32 +89,43 @@ while end:
             sizes = link.find_element_by_xpath('//div[@class = "infoEntity"][label[.] = "Size"]/'
                                                      'span[@class = "value"]').text
 
+            print('Size: ', sizes)
 
             # Col 7: Founded
             founded_years = link.find_element_by_xpath('//div[@class = "infoEntity"][label[.] = "Founded"]/'
                                                              'span[@class = "value"]').text
 
+            print('Founded: ', founded_years)
 
             # Col 8: Type
             types = link.find_element_by_xpath('//div[@class = "infoEntity"][label[.] = "Type"]/'
                                                      'span[@class = "value"]').text.replace("Company - ", "")
 
+            print('Type: ', types)
 
             # Col 9: Industry
             industries = link.find_element_by_xpath('//div[@class = "infoEntity"][label[.] = "Industry"]/'
                                                           'span[@class = "value"]').text
 
+            print('Industry: ', industries)
 
             # Col 10: Revenue
             revenues = link.find_element_by_xpath('//div[@class = "infoEntity"][label[.] = "Revenue"]/'
                                                         'span[@class = "value"]').text
+            print('Revenue: ', revenues)
 
         except:
             sizes = ''
+            print('Size: ', sizes)
             founded_years = ''
+            print('Founded: ', founded_years)
             types = ''
+            print('Type: ', types)
             industries = ''
+            print('Industry: ', industries)
             revenues = ''
+            print('Revenue: ', revenues)
+
             pass
 
         # Tab 3: Rating Tab (only this tab needs try except)
@@ -120,15 +135,23 @@ while end:
             # Decoding accents in CEO name
             CEOs = unidecode.unidecode(link.find_element_by_xpath('//div[@class = "tbl gfxContainer"]/div[3]/div[@class="tbl"]'
                                                     '/div[2]/div[1]').text)
+            print('CEO: ', CEOs)
             # Col 12: Recommend
             recommends = link.find_element_by_xpath('//div[@id = "EmpStats_Recommend"]').get_attribute('data-percentage')
+            print('Recommend: ', recommends)
 
             # Col 13: Approve of CEO
             approves = link.find_element_by_xpath('//div[@id = "EmpStats_Approve"]').get_attribute('data-percentage')
+            print('Approves: ', approves)
+            print('\n')
         except:
             CEOs = ''
+            print('CEO: ', CEOs)
             recommends = ''
+            print('Recommend: ', recommends)
             approves = ''
+            print('Approves: ', approves)
+            print('\n')
             pass
 
         df = df.append({
