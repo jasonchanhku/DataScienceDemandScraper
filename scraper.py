@@ -4,6 +4,9 @@ import time
 import pandas as pd
 import unidecode
 import scraperwiki
+import sqlite3
+
+conn = sqlite3.connect('data.sqlite')
 
 # PhantomJS support
 driver = webdriver.PhantomJS()
@@ -219,6 +222,7 @@ scraperwiki.sqlite.save(
         , table_name="data"
 )
 
+conn.close()
 time.sleep(5)
 driver.close()
 
