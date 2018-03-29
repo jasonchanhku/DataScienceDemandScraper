@@ -5,7 +5,12 @@ from selenium.webdriver.support.ui import WebDriverWait
 import time
 import pandas as pd
 import unidecode
-import scraperwiki
+import sqlite3
+
+# Open Connection
+
+conn = sqlite3.connect("data.sqlite")
+
 
 # PhantomJS support
 driver = webdriver.PhantomJS()
@@ -194,9 +199,8 @@ while end:
 # If this is our first run, the database won't exist yet.
 # So wrap in a try block.
 
-scraperwiki.sql.save(
-        unique_keys=['Link'], data=df, table_name="data"
-)
+df.to_sql("data", conn, if_exists="replace")
+
 
 # sleep and closes
 time.sleep(5)
