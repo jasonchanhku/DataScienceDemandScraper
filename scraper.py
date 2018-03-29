@@ -1,5 +1,3 @@
-
-
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 import time
@@ -9,7 +7,6 @@ import scraperwiki
 
 # PhantomJS support
 driver = webdriver.PhantomJS()
-
 
 driver.get('https://www.glassdoor.com/Job/hong-kong-data-scientist-jobs-SRCH_IL.0,9_IC2308631_KO10,24.htm')
 
@@ -24,11 +21,11 @@ driver.implicitly_wait(10)
 # At most, wait 30 seconds before exploding with a Timeout exception.
 wait = WebDriverWait(driver, 30)
 
-# To type in job title and location
-driver.find_element_by_css_selector('#KeywordSearch').send_keys('Data Scientist')
-driver.find_element_by_css_selector('#LocationSearch').clear()
-driver.find_element_by_css_selector('#LocationSearch').send_keys('Hong Kong')
-driver.find_element_by_css_selector('#HeroSearchButton').click()
+# # To type in job title and location
+# driver.find_element_by_css_selector('#KeywordSearch').send_keys('Data Scientist')
+# driver.find_element_by_css_selector('#LocationSearch').clear()
+# driver.find_element_by_css_selector('#LocationSearch').send_keys('Hong Kong')
+# driver.find_element_by_css_selector('#HeroSearchButton').click()
 
 # Initializer for the while loop. Will be false once reaches end of page.
 end = True
