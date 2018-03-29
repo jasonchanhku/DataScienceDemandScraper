@@ -198,7 +198,7 @@ scraperwiki.sql.save(
         unique_keys=['Link'], data=df, table_name="data"
 )
 
-# sleep and close
+# sleep and closes
 time.sleep(5)
 driver.close()
 
