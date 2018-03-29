@@ -36,7 +36,7 @@ end = True
 cols = ['Title', 'Company', 'Link', 'Rating', 'Job_Description', 'Size', 'Founded', 'Company_Type', 'Industry',
         'Revenue', 'CEO', 'Recommend', 'Approve']
 
-df = pd.DataFrame(columns=cols)
+df = {}
 
 while end:
     links = driver.find_elements_by_css_selector('#MainCol .flexbox .jobLink')
@@ -161,7 +161,7 @@ while end:
             print('\n')
             pass
 
-        df = df.append({
+        df = {
             'Link': job_links,
             'Title': job_titles,
             'Company': companies,
@@ -175,8 +175,9 @@ while end:
             'CEO': CEOs,
             'Recommend': recommends,
             'Approve': approves
-
-        }, ignore_index=True)
+                
+        }
+        
 
         time.sleep(2)
 
