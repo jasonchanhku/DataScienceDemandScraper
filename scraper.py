@@ -36,7 +36,7 @@ end = True
 cols = ['Title', 'Company', 'Link', 'Rating', 'Job_Description', 'Size', 'Founded', 'Company_Type', 'Industry',
         'Revenue', 'CEO', 'Recommend', 'Approve']
 
-df = {}
+df = pd.DataFrame(columns=cols)
 
 while end:
     links = driver.find_elements_by_css_selector('#MainCol .flexbox .jobLink')
@@ -161,7 +161,7 @@ while end:
             print('\n')
             pass
 
-        df = {
+        df = df.append({
             'Link': job_links,
             'Title': job_titles,
             'Company': companies,
@@ -176,7 +176,7 @@ while end:
             'Recommend': recommends,
             'Approve': approves
                 
-        }
+        })
         
 
         time.sleep(2)
@@ -192,8 +192,31 @@ while end:
 # If this is our first run, the database won't exist yet.
 # So wrap in a try block.
 
-scraperwiki.sql.save(
-        unique_keys=['Link'], data=df, table_name="data"
+scraperwiki.sqlite.save(
+        unique_keys=['Link'], data=
+        
+        
+        {
+            df['Link']: job_links,
+            df['Title']: job_titles,
+            df['Company']: companies,
+            df['Rating']: ratings,
+            df['Job_Description']: descriptions,
+            df['Size']: sizes,
+            df['Founded']: founded_years,
+            df['Company_Type']: types,
+            df['Industry']: industries,
+            df['Revenue']: revenues,
+            df['CEO']: CEOs,
+            df['Recommend']: recommends,
+            df['Approve']: approves
+					}
+        
+        
+        
+        
+        
+        , table_name="data"
 )
 
 time.sleep(5)
