@@ -197,5 +197,4 @@ while end:
 # sleep and closes
 time.sleep(5)
 driver.close()
-conn.close()
 
