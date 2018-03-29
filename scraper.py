@@ -1,15 +1,15 @@
+
+
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 import time
 import pandas as pd
 import unidecode
 import scraperwiki
-import sqlite3
-
-conn = sqlite3.connect('data.sqlite')
 
 # PhantomJS support
 driver = webdriver.PhantomJS()
+
 
 driver.get('https://www.glassdoor.com/Job/hong-kong-data-scientist-jobs-SRCH_IL.0,9_IC2308631_KO10,24.htm')
 
@@ -24,11 +24,11 @@ driver.implicitly_wait(10)
 # At most, wait 30 seconds before exploding with a Timeout exception.
 wait = WebDriverWait(driver, 30)
 
-# # To type in job title and location
-# driver.find_element_by_css_selector('#KeywordSearch').send_keys('Data Scientist')
-# driver.find_element_by_css_selector('#LocationSearch').clear()
-# driver.find_element_by_css_selector('#LocationSearch').send_keys('Hong Kong')
-# driver.find_element_by_css_selector('#HeroSearchButton').click()
+# To type in job title and location
+driver.find_element_by_css_selector('#KeywordSearch').send_keys('Data Scientist')
+driver.find_element_by_css_selector('#LocationSearch').clear()
+driver.find_element_by_css_selector('#LocationSearch').send_keys('Hong Kong')
+driver.find_element_by_css_selector('#HeroSearchButton').click()
 
 # Initializer for the while loop. Will be false once reaches end of page.
 end = True
@@ -178,9 +178,8 @@ while end:
             'CEO': CEOs,
             'Recommend': recommends,
             'Approve': approves
-                
-        })
-        
+
+        }, ignore_index=True)
 
         time.sleep(2)
 
@@ -195,34 +194,11 @@ while end:
 # If this is our first run, the database won't exist yet.
 # So wrap in a try block.
 
-scraperwiki.sqlite.save(
-        unique_keys=['Link'], data=
-        
-        
-        {
-            df['Link']: job_links,
-            df['Title']: job_titles,
-            df['Company']: companies,
-            df['Rating']: ratings,
-            df['Job_Description']: descriptions,
-            df['Size']: sizes,
-            df['Founded']: founded_years,
-            df['Company_Type']: types,
-            df['Industry']: industries,
-            df['Revenue']: revenues,
-            df['CEO']: CEOs,
-            df['Recommend']: recommends,
-            df['Approve']: approves
-					}
-        
-        
-        
-        
-        
-        , table_name="data"
+scraperwiki.sql.save(
+        unique_keys=['Link'], data=df, table_name="data"
 )
 
-conn.close()
+# sleep and close
 time.sleep(5)
 driver.close()
 
