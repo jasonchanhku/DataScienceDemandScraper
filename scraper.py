@@ -9,7 +9,6 @@ import sqlite3
 
 # Open Connection
 
-conn = sqlite3.connect("data.sqlite")
 
 
 # PhantomJS support
@@ -197,7 +196,7 @@ while end:
 
 # If this is our first run, the database won't exist yet.
 # So wrap in a try block.
-
+conn = sqlite3.connect("data.sqlite")
 df.to_sql("data", conn, if_exists="replace")
 
 
