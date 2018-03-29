@@ -9,8 +9,6 @@ import sqlite3
 
 # Open Connection
 
-
-
 # PhantomJS support
 driver = webdriver.PhantomJS()
 
@@ -22,7 +20,6 @@ driver.set_window_size(1280, 1024)
 
 # Make sure selenium doesn't give up
 # if it queries the dom before the ajax has landed
-driver.implicitly_wait(10)
 
 # Create our standard waitable...
 # At most, wait 30 seconds before exploding with a Timeout exception.
