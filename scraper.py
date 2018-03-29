@@ -27,7 +27,6 @@ driver.implicitly_wait(10)
 
 # Create our standard waitable...
 # At most, wait 30 seconds before exploding with a Timeout exception.
-wait = WebDriverWait(driver, 30)
 
 # # To type in job title and location
 # driver.find_element_by_css_selector('#KeywordSearch').send_keys('Data Scientist')
