@@ -56,7 +56,7 @@ while end:
             job_titles = link.text
             print('Title: ', job_titles)
         except:
-            time.sleep(5)
+            time.sleep(20)
             link.click()
             # Col 1: Job Title
             job_titles = link.text
