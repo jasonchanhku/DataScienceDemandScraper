@@ -50,11 +50,18 @@ while end:
         # Create our standard waitable...
         # At most, wait 30 seconds before exploding with a Timeout exception.
         wait = WebDriverWait(driver, 30)
-
-        link.click()
-        # Col 1: Job Title
-        job_titles = link.text
-        print('Title: ', job_titles)
+        try:
+            link.click()
+            # Col 1: Job Title
+            job_titles = link.text
+            print('Title: ', job_titles)
+        except:
+            time.sleep(5)
+            link.click()
+            # Col 1: Job Title
+            job_titles = link.text
+            print('Title: ', job_titles)
+            pass
 
         try:
             # to cancel the annoying pop up that tries to prevent scrapers
