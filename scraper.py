@@ -45,7 +45,7 @@ while end:
     for j, link in enumerate(links):
         time.sleep(2)
 
-        driver.implicitly_wait(10)
+        #driver.implicitly_wait(10)
 
         # Create our standard waitable...
         # At most, wait 30 seconds before exploding with a Timeout exception.
