@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.webdriver.support.ui import WebDriverWait
 import time
 import pandas as pd
 import unidecode
@@ -43,6 +44,13 @@ while end:
 
     for j, link in enumerate(links):
         time.sleep(2)
+
+        driver.implicitly_wait(10)
+
+        # Create our standard waitable...
+        # At most, wait 30 seconds before exploding with a Timeout exception.
+        wait = WebDriverWait(driver, 30)
+
         link.click()
         # Col 1: Job Title
         job_titles = link.text
