@@ -4,28 +4,26 @@ import pandas as pd
 import unidecode
 import sqlite3
 
-# Open Connection
+# Incognito mode
+options = webdriver.ChromeOptions()
+options.add_argument('--incognito')
 
-# PhantomJS support
-driver = webdriver.PhantomJS()
+# Headless option
+options2 = webdriver.ChromeOptions()
+options2.add_argument('headless')
 
-
-driver.get('https://www.glassdoor.com/Job/hong-kong-data-scientist-jobs-SRCH_IL.0,9_IC2308631_KO10,24.htm')
+# get web driver up and running
+driver = webdriver.Chrome(options=options, chrome_options=options2)
+driver.get('https://www.glassdoor.com/index.htm')
 
 # window size to make sure javascript parts does not get hidden
 driver.set_window_size(1280, 1024)
 
-# Make sure selenium doesn't give up
-# if it queries the dom before the ajax has landed
-
-# Create our standard waitable...
-# At most, wait 30 seconds before exploding with a Timeout exception.
-
-# # To type in job title and location
-# driver.find_element_by_css_selector('#KeywordSearch').send_keys('Data Scientist')
-# driver.find_element_by_css_selector('#LocationSearch').clear()
-# driver.find_element_by_css_selector('#LocationSearch').send_keys('Hong Kong')
-# driver.find_element_by_css_selector('#HeroSearchButton').click()
+# To type in job title and location
+driver.find_element_by_css_selector('#KeywordSearch').send_keys('Data Scientist')
+driver.find_element_by_css_selector('#LocationSearch').clear()
+driver.find_element_by_css_selector('#LocationSearch').send_keys('Hong Kong')
+driver.find_element_by_css_selector('#HeroSearchButton').click()
 
 # Initializer for the while loop. Will be false once reaches end of page.
 end = True
@@ -188,13 +186,13 @@ while end:
         end = False
         break
 
-# # If this is our first run, the database won't exist yet.
-# # So wrap in a try block.
-# conn = sqlite3.connect("data.sqlite")
-# df.to_sql("data", conn, if_exists="replace")
+print('Data successfully scraped')
 
+conn = sqlite3.connect('data.sqlite')
+df.to_sql('data', conn, if_exists='replace')
 
-# sleep and closes
+print('Db successfully constructed and saved')
+
 time.sleep(5)
 driver.close()
-
+conn.close()
