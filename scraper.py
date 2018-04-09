@@ -13,6 +13,7 @@ import sqlite3
 options2 = webdriver.ChromeOptions()
 options2.add_argument('--headless')
 options2.add_argument('--disable-dev-shm-usage')
+options2.add_argument('--no-sandbox')
 
 # get web driver up and running
 driver = webdriver.Chrome(options=options2)
