@@ -11,7 +11,8 @@ import sqlite3
 
 # Headless option
 options2 = webdriver.ChromeOptions()
-options2.add_argument('headless')
+options2.add_argument('--headless')
+options2.add_argument('--disable-dev-shm-usage')
 
 # get web driver up and running
 driver = webdriver.Chrome(chrome_options=options2)
