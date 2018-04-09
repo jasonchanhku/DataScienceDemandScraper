@@ -14,6 +14,7 @@ options2 = webdriver.ChromeOptions()
 options2.add_argument('--headless')
 options2.add_argument('--disk-cache-size')
 options2.add_argument('--disable-dev-shm-usage')
+options2.add_argument('--gpu-program-cache-size-kb')
 
 # get web driver up and running
 driver = webdriver.Chrome(chrome_options=options2)
