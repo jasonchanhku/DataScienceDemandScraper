@@ -10,9 +10,9 @@ from pyppeteer import launch
 #options = webdriver.ChromeOptions()
 #options.add_argument('--incognito')
 
-browser = launch({
-  'args': '--disable-dev-shm-usage'
-})
+# browser = launch({
+#   'args': '--disable-dev-shm-usage'
+# })
 
 
 # Headless option
