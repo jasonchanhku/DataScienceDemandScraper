@@ -217,5 +217,5 @@ df.to_sql('data', conn, if_exists='replace')
 print('Db successfully constructed and saved')
 
 time.sleep(5)
-driver.close()
+#driver.close()
 conn.close()
