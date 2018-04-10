@@ -49,15 +49,13 @@ while end:
     for j, link in enumerate(links):
         time.sleep(2)
 
-        #driver.implicitly_wait(10)
-
         # Make sure selenium doesn't give up
         # if it queries the dom before the ajax has landed
-        driver.implicitly_wait(10)
+        #driver.implicitly_wait(10)
 
         # Create our standard waitable...
         # At most, wait 30 seconds before exploding with a Timeout exception.
-        wait = WebDriverWait(driver, 30)
+        wait = WebDriverWait(driver, 100)
         try:
             link.click()
             # Col 1: Job Title
@@ -217,5 +215,5 @@ df.to_sql('data', conn, if_exists='replace')
 print('Db successfully constructed and saved')
 
 time.sleep(5)
-#driver.close()
+driver.close()
 conn.close()
