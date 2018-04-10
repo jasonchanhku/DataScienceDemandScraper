@@ -28,6 +28,14 @@ driver.find_element_by_css_selector('#LocationSearch').clear()
 driver.find_element_by_css_selector('#LocationSearch').send_keys('Hong Kong')
 driver.find_element_by_css_selector('#HeroSearchButton').click()
 
+# Make sure selenium doesn't give up
+# if it queries the dom before the ajax has landed
+driver.implicitly_wait(10)
+
+# Create our standard waitable...
+# At most, wait 30 seconds before exploding with a Timeout exception.
+wait = WebDriverWait(driver, 30)
+
 # Initializer for the while loop. Will be false once reaches end of page.
 end = True
 
