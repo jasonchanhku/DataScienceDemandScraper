@@ -10,13 +10,13 @@ import sqlite3
 #options.add_argument('--incognito')
 
 # Headless option
-options2 = webdriver.ChromeOptions()
-options2.add_argument('--headless')
-options2.add_argument('--disable-dev-shm-usage')
-options2.add_argument('--no-sandbox')
+options = webdriver.ChromeOptions()
+options.add_argument('--headless')
+options.add_argument('--disable-dev-shm-usage')
+options.add_argument('--disable-impl-side-painting')
 
 # get web driver up and running
-driver = webdriver.Chrome(options=options2)
+driver = webdriver.Chrome(options=options)
 driver.get('https://www.glassdoor.com/index.htm')
 
 # window size to make sure javascript parts does not get hidden
