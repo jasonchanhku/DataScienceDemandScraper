@@ -4,15 +4,20 @@ import time
 import pandas as pd
 import unidecode
 import sqlite3
+from pyppeteer import launch
 
 # Incognito mode
 #options = webdriver.ChromeOptions()
 #options.add_argument('--incognito')
 
+browser = launch({
+  'args': '--disable-dev-shm-usage'
+})
+
+
 # Headless option
 options = webdriver.ChromeOptions()
 options.add_argument('--headless')
-options.add_argument('--disable-dev-shm-usage')
 options.add_argument('--disable-impl-side-painting')
 
 # get web driver up and running
@@ -27,8 +32,6 @@ driver.find_element_by_css_selector('#KeywordSearch').send_keys('Data Scientist'
 driver.find_element_by_css_selector('#LocationSearch').clear()
 driver.find_element_by_css_selector('#LocationSearch').send_keys('Hong Kong')
 driver.find_element_by_css_selector('#HeroSearchButton').click()
-
-
 
 # Initializer for the while loop. Will be false once reaches end of page.
 end = True
