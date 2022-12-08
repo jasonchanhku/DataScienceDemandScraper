@@ -1,5 +1,5 @@
 alembic==0.9.9
-certifi==2018.1.18
+certifi==2022.12.7
 chardet==3.0.4
 idna==2.6
 Mako==1.0.7
